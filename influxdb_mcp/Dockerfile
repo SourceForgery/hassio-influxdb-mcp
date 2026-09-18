@@ -16,7 +16,7 @@ RUN CGO_ENABLED=0 go build \
     -o /out/ha-influxdb-mcp \
     ./cmd/ha-influxdb-mcp
 
-FROM alpine:3.22
+FROM alpine:3.24
 
 ARG BUILD_VERSION=dev
 ARG BUILD_ARCH=unknown
