@@ -1,0 +1,48 @@
+configuration:
+  influx_url:
+    name: InfluxDB URL
+    description: Internal URL of the InfluxDB 1.x-compatible query API.
+  influx_database:
+    name: Database
+    description: InfluxDB database containing Home Assistant history.
+  influx_username:
+    name: Read-only username
+    description: Optional InfluxDB user with READ permission only.
+  influx_password:
+    name: Read-only password
+    description: Password for the read-only InfluxDB user.
+  influx_verify_tls:
+    name: Verify InfluxDB TLS
+    description: Verify the certificate when influx_url uses HTTPS.
+  request_timeout_seconds:
+    name: Query timeout
+    description: Maximum duration of one InfluxDB request in seconds.
+  max_points:
+    name: Maximum points
+    description: Hard maximum number of points returned per time series.
+  max_entities_per_query:
+    name: Maximum compared entities
+    description: Hard maximum accepted by query_entities.
+  max_schema_series:
+    name: Schema scan limit
+    description: Maximum series inspected while discovering Home Assistant entities.
+  max_lookback_days:
+    name: Maximum lookback
+    description: Longest permitted historical query range in days.
+  openai_tunnel_enabled:
+    name: Enable OpenAI Secure MCP Tunnel
+    description: Connect outbound to the selected private OpenAI MCP tunnel.
+  openai_tunnel_id:
+    name: OpenAI tunnel ID
+    description: Tunnel identifier created in OpenAI Platform tunnel settings.
+  openai_tunnel_api_key:
+    name: OpenAI tunnel runtime API key
+    description: Runtime key whose principal has Tunnels Read and Use permissions.
+  tunnel_ready_timeout_seconds:
+    name: Tunnel startup timeout
+    description: Time allowed for the outbound tunnel to become ready.
+  log_level:
+    name: Log level
+    description: Application logging verbosity. Secrets and query results are never logged.
+network:
+  8080/tcp: Local MCP and diagnostic endpoint; leave unmapped when using Secure MCP Tunnel.

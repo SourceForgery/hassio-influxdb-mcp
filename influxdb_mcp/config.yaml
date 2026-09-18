@@ -1,0 +1,45 @@
+name: Home Assistant InfluxDB MCP
+version: "0.1.0"
+slug: influxdb_mcp
+description: Read-only ChatGPT access to Home Assistant history in InfluxDB
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+init: true
+stage: experimental
+watchdog: http://[HOST]:[PORT:8080]/healthz
+webui: http://[HOST]:[PORT:8080]/
+ports:
+  8080/tcp: null
+ports_description:
+  8080/tcp: Local MCP and diagnostic HTTP endpoint (normally leave disabled)
+options:
+  influx_url: http://a0d7b954-influxdb:8086
+  influx_database: home_assistant
+  influx_verify_tls: true
+  request_timeout_seconds: 20
+  max_points: 2000
+  max_entities_per_query: 10
+  max_schema_series: 10000
+  max_lookback_days: 3660
+  openai_tunnel_enabled: false
+  tunnel_ready_timeout_seconds: 90
+  log_level: info
+schema:
+  influx_url: url
+  influx_database: str
+  influx_username: str?
+  influx_password: password?
+  influx_verify_tls: bool
+  request_timeout_seconds: int(1,120)
+  max_points: int(1,10000)
+  max_entities_per_query: int(1,50)
+  max_schema_series: int(100,100000)
+  max_lookback_days: int(1,36500)
+  openai_tunnel_enabled: bool
+  openai_tunnel_id: str?
+  openai_tunnel_api_key: password?
+  tunnel_ready_timeout_seconds: int(5,600)
+  log_level: list(debug|info|warn|error)

@@ -1,0 +1,4 @@
+/influxdb_mcp/ha-influxdb-mcp
+/influxdb_mcp/coverage.out
+*.zip
+.DS_Store

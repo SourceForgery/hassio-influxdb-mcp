@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: influxdb_mcp/go.mod
+          cache-dependency-path: influxdb_mcp/go.sum
+      - name: Install metadata validator dependency
+        run: python3 -m pip install --disable-pip-version-check pyyaml
+      - name: Check formatting
+        run: make fmt-check
+      - name: Validate Home Assistant repository
+        run: make validate
+      - name: Vet
+        run: make vet
+      - name: Test with race detector
+        run: make test-race
+      - name: Build
+        run: make build
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: influxdb_mcp
+          platforms: linux/amd64,linux/arm64
+          push: false
+          build-args: |
+            BUILD_VERSION=0.1.0
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

@@ -1,0 +1,6 @@
+.git
+*_test.go
+coverage.out
+README.md
+DOCS.md
+CHANGELOG.md
