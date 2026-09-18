@@ -3,7 +3,7 @@ module ha-influxdb-mcp
 go 1.27.0
 
 require (
-	github.com/modelcontextprotocol/go-sdk v1.7.0
+	github.com/modelcontextprotocol/go-sdk v1.8.0
 	github.com/openai/tunnel-client v0.0.14
 )
 
